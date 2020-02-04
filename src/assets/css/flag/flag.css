@@ -1,0 +1,22 @@
+.flag {
+    background-image: url(i-flag.png);
+    height: 25px;
+    width: 37px;
+    display: inline-block;
+}
+
+.flag-us {
+    background-position: 0 -50px;
+}
+
+.flag-eu {
+    background-position: 0 0;
+}
+
+.flag-jp {
+    background-position: 0 -100px;
+}
+
+.flag-ph {
+    background-position: 0 -550px;
+}

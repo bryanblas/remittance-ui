@@ -1,0 +1,129 @@
+.loader-backdrop {
+  width: 100%;
+  height: calc(100% - 67px);
+  position: absolute;
+  top: 67px;
+  left: 0;
+}
+
+.loader-backdrop.outside {
+  height: 100% !important;
+  top: 0;
+}
+
+.loader-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.10;
+  z-index: 200;
+  width: 100%;
+  height: 100%;
+}
+
+.page-loader {
+  position: absolute;
+  left: calc(50% - 64px);
+  top: calc(50% - 64px);
+  width: 64px;
+  height: 64px;
+  border-radius: 20%;
+  z-index: 1000;
+}
+
+.lds-css {
+  width: 100px; height: 100px;
+}
+
+@keyframes lds-double-ring {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes lds-double-ring {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes lds-double-ring_reverse {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes lds-double-ring_reverse {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+.lds-css {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+}
+
+.lds-double-ring {
+  position: relative;
+}
+.lds-double-ring div {
+  box-sizing: border-box;
+}
+.lds-double-ring > div {
+  position: absolute;
+  width: 108px;
+  height: 108px;
+  top: 16px;
+  left: 16px;
+  border-radius: 50%;
+  border: 8px solid #000;
+  border-color: #066895 transparent #066895 transparent;
+  -webkit-animation: lds-double-ring 1s linear infinite;
+  animation: lds-double-ring 1s linear infinite;
+}
+.lds-double-ring > div:nth-child(2),
+.lds-double-ring > div:nth-child(4) {
+  width: 88px;
+  height: 88px;
+  top: 26px;
+  left: 26px;
+  -webkit-animation: lds-double-ring_reverse 1s linear infinite;
+  animation: lds-double-ring_reverse 1s linear infinite;
+}
+.lds-double-ring > div:nth-child(2) {
+  border-color: transparent #f27327 transparent #f27327;
+}
+.lds-double-ring > div:nth-child(3) {
+  border-color: transparent;
+}
+.lds-double-ring > div:nth-child(3) div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.lds-double-ring {
+  -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+  transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+}
+

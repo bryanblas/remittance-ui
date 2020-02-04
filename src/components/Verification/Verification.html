@@ -1,0 +1,31 @@
+<div class="container">
+    <PageLoader class="outside" v-show="loader"></PageLoader>
+     <div class="row">
+        <div class="col-md-6 mx-auto mt-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="alert alert-secondary d-flex align-content-center" role="alert">
+                <template v-if="verify">
+                  <div class="alert-icon">
+                    <SuccessCheck></SuccessCheck>
+                  </div>
+                  <div class="alert-text align-center">
+                    Account is now Verified.
+                    <p class="m-0"><router-link to="/login">Go to Login Page</router-link></p>
+                  </div>
+                </template>
+                <template v-else>
+                  <div class="alert-icon">
+                    <icon-alert-outline />
+                  </div>
+                  <div class="alert-text align-center">
+                    This link is not available or already been used.
+                    <p class="m-0"><router-link to="/login">Go to Login Page</router-link><br/><router-link to="/register">Click here to Register</router-link></p>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

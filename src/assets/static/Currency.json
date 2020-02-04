@@ -1,0 +1,6 @@
+[
+    {"currency" : "USD", "flag" : "flag-us"},
+    {"currency" : "EUR", "flag" : "flag-eu"},
+    {"currency" : "JYP", "flag" : "flag-jp"},
+    {"currency" : "PHP", "flag" : "flag-ph"}
+]

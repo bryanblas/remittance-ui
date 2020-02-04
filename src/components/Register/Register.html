@@ -1,0 +1,59 @@
+<div class="container">
+    <PageLoader class="outside" v-show="loader"></PageLoader>
+    <Animated enter="zoomIn" leave="zoomOut" duration="500">
+    <div v-if="init_load" class="row">
+        <div class="col-md-4 mx-auto mt-4">
+          <div class="row mb-4">
+            <div class="col-md-12" :class="{ 'formError': $v.form.first_name.$error }">
+              <input type="text" v-model.trim="$v.form.first_name.$model" class="form-control" placeholder="First Name">
+              <span class="error" v-if="!$v.form.first_name.required">First Name is required</span>
+              <span class="error" v-if="!$v.form.first_name.minLength">First Name should have at least (3) characters</span>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-12" :class="{ 'formError': $v.form.last_name.$error }">
+              <input type="text" v-model.trim="$v.form.last_name.$model" class="form-control" placeholder="Last Name">
+              <span class="error" v-if="!$v.form.last_name.required">Last Name is required</span>
+              <span class="error" v-if="!$v.form.last_name.minLength">Last Name should have at least (3) characters</span>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-12" :class="{ 'formError': $v.form.email.$error }">
+              <input type="email" v-model.trim="$v.form.email.$model" class="form-control" placeholder="Email Address">
+              <span class="error" v-if="!$v.form.email.required">Email Address is required</span>
+               <span class="error" v-if="!$v.form.email.email">Invalid Email Address</span>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-12" :class="{ 'formError': $v.form.password.$error }">
+              <input type="password" v-model.trim="$v.form.password.$model" class="form-control" placeholder="Passsword">
+              <span class="error" v-if="!$v.form.password.required">Password is required</span>
+               <span class="error" v-if="!$v.form.password.minLength">Password should have at least (8) characters</span>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-md-12" :class="{ 'formError': $v.form.password_confirmation.$error }">
+              <input type="password" v-model.trim="$v.form.password_confirmation.$model" class="form-control" placeholder="Confirm Passsword">
+              <span class="error" v-if="!$v.form.password_confirmation.sameAsPassword">Password is not the same</span>
+            </div>
+          </div>
+          <div class="row mb-2 mt-2">
+            <div class="col-md-12" :class="{ 'formError': recaptcha_token_error }">
+              <vue-recaptcha ref="recaptcha" @verify="onCaptchaVerified" @expired="onCaptchaExpired" sitekey="6LdGp7sUAAAAAB7Ao9fCkr-MKmtZ1K3qEoWt_V_H"></vue-recaptcha>
+              <span class="error" v-show="recaptcha_token_error">Confirm that you are human</span>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6 ">
+              <button type="button" class="btn btn-info btn-block" v-on:click="submitRegister()">Save</button>
+            </div>
+            <div class="col-md-6 ">
+              <router-link to="/login" class="btn btn-secondary btn-block">Cancel</router-link>
+            </div>
+          </div>
+        </div>
+    </div>
+    </Animated>
+    <Modal :title="modal.title" :content="modal.content" v-on:triggerOkButton="pushToLoginPage"></Modal>
+</div>

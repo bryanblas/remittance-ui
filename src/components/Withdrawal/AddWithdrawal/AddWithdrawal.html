@@ -1,0 +1,136 @@
+<div>
+    <PageLoader v-show="loader"></PageLoader>
+    <main role="main">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        Withdrawal Request
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-md-12" :class="{ 'formError': $v.form.merchant_currency_from.$error }">
+                                <label>Debit to Account <small>(select one)</small></label>
+                                <select class="form-control" v-model.trim="$v.form.merchant_currency_from.$model">
+                                    <option v-for="balance in balances" :value="balance.currency">{{balance.currency}} - {{ formatAmount(balance.amount) }}</option>
+                                </select>
+                                <span class="error"  v-if="!$v.form.merchant_currency_from.numeric">Debit Acount is required</span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-4" :class="{ 'formError': $v.form.currency.$error }">
+                                <label>Currency</label>
+                                <select class="form-control" v-model.trim="$v.form.currency.$model">
+                                    <option value="">Select One</option>
+                                    <option :value="currency.currency" v-for="currency in currency_list">{{ currency.currency }}</option>
+                                </select>
+                                 <span class="error" v-if="!$v.form.currency.required">Currency is required</span>
+                            </div>
+                            <div class="col-md-8" :class="{ 'formError': $v.form.currency.$error }">
+                                <label>Amount</label>
+                                <input type="number" class="form-control" v-model.trim="$v.form.amount.$model">
+                                <span class="error" v-if="!$v.form.amount.required">Amount is required</span>
+                                <span class="error" v-if="!$v.form.amount.numeric">Amount is not a valid number</span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6" :class="{ 'formError': $v.form.account_number.$error }">
+                                <label>Account Number or IBAN</label>
+                                <input type="text" class="form-control" v-model.trim="$v.form.account_number.$model">
+                                <span class="error" v-if="!$v.form.account_number.required">Account Number or IBAN is required</span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-4" :class="{ 'formError': $v.form.account_type.$error }">
+                                <label>Account Type</label>
+                                <select class="form-control" v-model.trim="$v.form.account_type.$model">
+                                    <option value="Personal">Personal</option>
+                                    <option value="Corporate">Corporate</option>
+                                </select>
+                                <span class="error" v-if="!$v.form.account_type.required">Account Type is required</span>
+                            </div>
+                            <div class="col-md-8" :class="{ 'formError': $v.form.beneficiary_name.$error }">
+                                <label>Beneficiary Name</label>
+                                <input type="text" class="form-control" v-model.trim="$v.form.beneficiary_name.$model">
+                                <span class="error" v-if="!$v.form.beneficiary_name.required">Beneficiary Name is required</span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-12" :class="{ 'formError': $v.form.beneficiary_address.$error }">
+                                <label>Beneficiary Address</label>
+                                <input type="text" class="form-control" v-model.trim="$v.form.beneficiary_address.$model">
+                                <span class="error" v-if="!$v.form.beneficiary_address.required">Beneficiary Address is required</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" :class="{ 'formError': $v.form.beneficiary_country.$error }">
+                                <label>Beneficiary Country</label>
+                                <select class="form-control" v-model.trim="$v.form.beneficiary_country.$model">
+                                    <option value="">Select One</option>
+                                    <option :value="country.name" v-for="country in country_list">{{ country.name }}</option>
+                                </select>
+                                <span class="error" v-if="!$v.form.beneficiary_country.required">Beneficiary Country is required</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer"><p class="button-spacer"></p></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">&nbsp;</div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-md-6" :class="{ 'formError': $v.form.bank_name.$error }">
+                                <label>Bank Name</label>
+                                <input type="text" class="form-control" v-model.trim="$v.form.bank_name.$model">
+                                <span class="error" v-if="!$v.form.bank_name.required">Bank Name is required</span>
+                            </div>
+                            <div class="col-md-6" :class="{ 'formError': $v.form.swift_code.$error }">
+                                <label>Swift Code</label>
+                                <input type="text" class="form-control" v-model.trim="$v.form.swift_code.$model">
+                                <span class="error" v-if="!$v.form.swift_code.required">Swift Code is required</span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-12" :class="{ 'formError': $v.form.bank_address.$error }">
+                                <label>Bank Address</label>
+                                <input type="text" class="form-control" v-model.trim="$v.form.bank_address.$model">
+                                <span class="error" v-if="!$v.form.bank_address.required">Bank Address is required</span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-12" :class="{ 'formError': $v.form.bank_country.$error }">
+                                <label>Bank Country</label>
+                                <select class="form-control" v-model.trim="$v.form.bank_country.$model">
+                                    <option value="">Select One</option>
+                                    <option :value="country.name" v-for="country in country_list">{{ country.name }}</option>
+                                </select>
+                                <span class="error" v-if="!$v.form.bank_country.required">Bank Country is required</span>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-8" :class="{ 'formError': $v.form.contact_number.$error }">
+                                <label>Contact Number of Bank Account Holder</label>
+                                <input type="text" class="form-control" v-model.trim="$v.form.contact_number.$model">
+                                <span class="error" v-if="!$v.form.contact_number.required">Contact Number is required</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Remarks</label>
+                                <textarea rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="button" class="btn btn-info" v-on:click="submitWithdrawal">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </main>
+    <Modal :title="modal.title" :content="modal.content" v-on:triggerOkButton="pushToWithdrawalListPage"></Modal>
+</div>

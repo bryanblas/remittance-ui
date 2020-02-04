@@ -1,0 +1,48 @@
+<div>
+    <!-- Begin page content -->
+    <PageLoader v-show="loader"></PageLoader>
+    <main role="main">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        Deposit List
+                        <div class="float-right">
+                            <router-link to="/deposit/add" class="icon-link text-success"><icon-plus-circle-outline /></router-link>
+                        </div>
+                    </div>
+                    <div v-if="deposits.length > 0" class="table-responsive">
+                        <table  aria-busy="false" aria-colcount="5" class="table b-table">
+                            <thead role="rowgroup" class="thead-dark">
+                                <tr role="row">
+                                    <th>Transcation Number</th>
+                                    <th>Account Number</th>
+                                    <th>Currency</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="deposit in deposits">
+                                    <td>{{ deposit.transaction_number }}</td>
+                                    <td>{{ deposit.bank_code }} - {{ deposit.bank_account_id }}</td>
+                                    <td>{{ deposit.currency }}</td>
+                                    <td>{{ formatAmount(deposit.amount) }}</td>
+                                    <td>{{ formatDate(deposit.transaction_date) }}</td>
+                                    <td :class="{'text-success' : deposit.status == 'Verified'}">{{ deposit.status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div v-else class="card-body">
+                        <b-alert variant="warning" show><icon-alert-outline class="icon-badge mr-2" /> There are no deposits available.</b-alert>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </main>
+
+</div>

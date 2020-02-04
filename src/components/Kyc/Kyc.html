@@ -1,0 +1,107 @@
+<div>
+    <!-- Begin page content -->
+    <PageLoader v-show="loader"></PageLoader>
+    <main role="main">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6 mt-5">
+                <div class="card">
+                    <div class="card-header">KYC Document</div>
+                    <div class="card-body">
+                        <div class="alert alert-secondary d-flex justify-content-around" role="alert">
+                            <div class="alert-text align-self-center">The status of your KYC application</div>
+                            <div class="alert-icon p-0">
+                                <icon-account-clock-outline class="text-default" v-if="merchant.kyc_status == 'Pending'" />
+                                <SuccessCheck v-else-if="merchant.kyc_status == 'Verified'"></SuccessCheck>
+                                <p class="mt-2 mb-0">{{ merchant.kyc_status }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body border-top" v-show="merchant.kyc_status != 'Verified'">
+                        <h5 class="mb-3">Proof of Identity <a href="javascript:;" v-b-toggle.info-identity ><icon-information-outline /></a> </h5>
+                        <b-collapse id="info-identity">
+                            <p>The documents submitted as proof of identity should be valid for at least 3 months from the date of application, and should be issued by the government.</p>
+                            <p>Full name, ID photo, validity period, issuing authority and date of birth should be seen clearly.</p>
+                            <p>Address in PP (if any) should be the same with the address the in the submitted POA</p>
+                            <p>Acceptable Proof of Identity documents are as follows:</p>
+                            <ol class="mb-4 pl-4">
+                                <li class="mb-1 text-info">Passport</li>
+                                <li class="mb-1 text-info">Driver's License (Front and Back)</li>
+                                <li class="mb-1 text-info">Resident Identification Card (Front and Back)</li>
+                            </ol>
+                        </b-collapse>
+                        <div class="row mx-1 px-1 py-3 file-section">
+                            <FileUpload ref="file_indentity" :required="true" v-model="form.proof_identity"></FileUpload>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-info btn-block" v-on:click="proofOfIndentity()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body border-top" v-show="merchant.kyc_status != 'Verified'">
+                        <h5 class="mb-3">Proof of Address <a href="javascript:;" v-b-toggle.info-address ><icon-information-outline /></a> </h5>
+                        <b-collapse id="info-address">
+                            <p>The documents submitted as proof of current residential address should be issued within the last 3 months from the date of application, and should be issued by the government and utility service providers.
+                            Full name, detailed residential address, issue date, validity period, and issuing authority should be seen clearly.</p>
+                            <p>Acceptable Proof of Address documents are as follows:</p>
+                            <ol class="mb-4 pl-4">
+                                <li class="mb-1 text-info">Electricity Bill</li>
+                                <li class="mb-1 text-info">Gas Bill</li>
+                                <li class="mb-1 text-info">Telephone Bill/Bank Statement</li>
+                                <li class="mb-1 text-info">Water Bill</li>
+                                <li class="mb-1 text-info">Residence Permit</li>
+                                <li class="mb-1 text-info">Certificate of Insurance</li>
+                                <li class="mb-1 text-info">Temporary Residential Permit</li>
+                                <li class="mb-1 text-info">Driver's License</li>
+                                <li class="mb-1 text-info">Residential/Village Committee Member Certificate</li>
+                                <li class="mb-1 text-info">Disabled Certificate</li>
+                                <li class="mb-1 text-info">Retirement  Certificate</li>
+                            </ol>
+                        </b-collapse>
+                        <div class="row mx-1 px-1 py-3 file-section">
+                            <FileUpload ref="file_address" :required="true" v-model="form.proof_address"></FileUpload>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-info btn-block" v-on:click="proofOfAddress()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mt-5">
+                <div class="row">
+                    <div class="col-md-6" v-for="document in kyc_docs">
+                        <div class="card file-card" v-bind:class="{ 'bg-rejected' : document.status == 'Rejected' }">
+                            <div class="card-header p-2 text-center">
+                                 <span class="tile-header">{{ document.document_type }}</span>
+                            </div>
+                            <div class="card-body pt-0 text-center">
+                                <a href="javascript:;" class="px-4" v-on:click="previewFile(document)">
+                                    <icon-image class="text-info preview-icon" />
+                                </a>
+                                <p class="mt-2"><small class="text-dark">{{ document.filename }}</small></p>
+                                <div class="d-flex m-0 text-muted">
+                                    <small class="font-weight-normal" :class="getClassByStatus(document.status)">{{ document.status }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <b-modal id="show-preview">
+        <div slot="modal-title">
+            {{ file.title }}
+        </div>
+        <p class="py-2 mb-0">
+            <img :src="file.selected">
+        </p>
+        <div slot="modal-footer">
+            <button type="button" class="btn btn-info" v-on:click="$bvModal.hide('show-preview')" >OK</button>
+        </div>
+    </b-modal>
+
+        <Modal :title="modal.title" :content="modal.content"></Modal>
+    </main>
+
+</div>

@@ -1,0 +1,60 @@
+<div>
+    <!-- Begin page content -->
+    <PageLoader v-show="loader"></PageLoader>
+    <main role="main">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        Withdrawal List
+                        <div class="float-right">
+                            <router-link to="/withdrawal/add" class="icon-link text-success"><icon-plus-circle-outline /></router-link>
+                        </div>
+                    </div>
+                    <div v-if="withdrawals.length > 0" class="table-responsive">
+                        <table  aria-busy="false" aria-colcount="5" class="table b-table">
+                            <thead role="rowgroup" class="thead-dark">
+                                <tr role="row">
+                                    <th>Transaction Date</th>
+                                    <th>Transaction Number</th>
+                                    <th>Merchant</th>
+                                    <th>Beneficiary Name</th>
+                                    <th>Account Number</th>
+                                    <th>Debit Currency</th>
+                                    <th>Amount</th>
+                                    <th>Withdrawal Currency</th>
+                                    <th>Rate</th>
+                                    <th>Fee</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="withdrawal in withdrawals">
+                                    <td>{{ formatDate(withdrawal.created_at) }}</td>
+                                    <td>{{ withdrawal.transaction_number }}</td>
+                                    <td>{{ withdrawal.merchant.email }}</td>
+                                    <td>{{ withdrawal.beneficiary_name }}</td>
+                                    <td>{{ withdrawal.account_number }}</td>
+                                    <td>{{ withdrawal.balance.currency }}</td>
+                                    <td>{{ formatAmount(withdrawal.amount) }}</td>
+                                    <td>{{ withdrawal.currency }}</td>
+                                    <td>{{ withdrawal.rate }}</td>
+                                    <td>{{ withdrawal.fee }}</td>
+                                    <td :class="{'text-success' : withdrawal.status == 'Completed'}">{{ withdrawal.status }}</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div v-else class="card-body">
+                        <b-alert variant="warning" show><icon-alert-outline class="icon-badge mr-2" /> There are no withdrawals available.</b-alert>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </main>
+
+</div>

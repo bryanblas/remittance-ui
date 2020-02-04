@@ -1,0 +1,45 @@
+.file-card {
+    border-color: transparent !important;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.alert-text {
+        vertical-align: middle;
+}
+
+.alert-icon {
+    flex-direction: column;
+}
+
+.alert-icon p {
+    font-size: 12px;
+    color: #CCC;
+}
+
+h5 {
+    font-size: 16px;
+}
+
+p,
+ol li {
+    color: #75757C;
+    font-size: 13px;
+}
+
+.file-section {
+    border-left: 4px solid #e2e5ec;
+    background-color: #f9f9fc;
+}
+
+.tile-header {
+    font-size: 14px;
+}
+
+.card-img {
+    border-radius: 0
+}
+
+.preview-icon {
+    font-size: 80px;
+}

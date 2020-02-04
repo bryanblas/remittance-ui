@@ -1,0 +1,5 @@
+<div class="col-md-8" :class="{ 'formError': form.required || form.format }">
+    <input type="file" ref="file" class="form-control-file" v-on:change="onFileChange" />
+    <span class="error" v-show="form.required">File is required</span>
+    <span class="error" v-show="form.format">Invalid document {{ supported_format }}</span>
+</div>

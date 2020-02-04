@@ -1,0 +1,34 @@
+<div>
+    <!-- Begin page content -->
+    <PageLoader v-show="loader"></PageLoader>
+    <main role="main">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card mt-5">
+                    <div class="card-header">Your Balance</div>
+                    <div class="card-body">
+                        <table aria-busy="false" class="table">
+                            <thead role="rowgroup" class="thead-light">
+                                <tr role="row">
+                                    <th>Currency</th>
+                                    <th></th>
+                                    <th class="text-right">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody role="rowgroup" class="">
+                                <tr v-for="cur in currency_lists">
+                                    <td><span class="flag" :class="cur.flag"></span></td>
+                                    <td>{{ cur.currency }}</td>
+                                    <td class="text-right">{{ (!isNaN(amounts[cur.currency])) ? formatAmount(amounts[cur.currency]) : '0.00'  }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </main>
+
+</div>

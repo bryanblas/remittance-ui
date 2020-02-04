@@ -1,0 +1,71 @@
+<div>
+    <PageLoader v-show="loader"></PageLoader>
+    <main role="main">
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        Deposit Request
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-4" :class="{ 'formError': $v.form.bank_account_id.$error }">
+                                <label>Bank Account</label>
+                                <select class="form-control" v-model.trim="$v.form.bank_account_id.$model">
+                                    <option value="">Select One</option>
+                                    <option v-for="account in bank_accounts" :value="account.id">
+                                    {{ account.bank_code }} - {{ account.bank_branch }} - {{ account.number }}
+                                    </option>
+                                </select>
+                                <span class="error" v-if="!$v.form.bank_account_id.required">Bank Account is required</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-4" :class="{ 'formError': $v.form.currency.$error }">
+                                <label>Currency</label>
+                                <select class="form-control" v-model.trim="$v.form.currency.$model">
+                                    <option value="">Select One</option>
+                                    <option v-for="currency in currency_lists" :value="currency.currency">{{ currency.currency }}</option>
+                                </select>
+                                <span class="error" v-if="!$v.form.currency.required">Currency is required</span>
+                            </div>
+
+                            <div class="col-md-8 mb-4" :class="{ 'formError': $v.form.amount.$error }">
+                                <label>Amount</label>
+                                <input type="text" class="form-control" v-model.trim="$v.form.amount.$model" />
+                                <span class="error" v-if="!$v.form.amount.required">Amount is required</span>
+                                <span class="error" v-if="!$v.form.amount.numeric">Invalid amount</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-4" :class="{ 'formError': $v.form.transaction_date.$error }">
+                                <label>Deposit Date</label>
+                                <input type="date" class="form-control" v-model.trim="$v.form.transaction_date.$model" />
+                                <span class="error" v-if="!$v.form.transaction_date.required">Deposit Date is required</span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <FileUpload ref="file_deposit_slip" :required="true" v-model="form.deposit_slip"></FileUpload>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <label>Remarks</label>
+                                <textarea rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button type="button" class="btn btn-info" v-on:click="submitAddDeposit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </main>
+    <Modal :title="modal.title" :content="modal.content" v-on:triggerOkButton="pushToDepositListPage"></Modal>
+</div>

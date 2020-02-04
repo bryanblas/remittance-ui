@@ -1,0 +1,7 @@
+.table tr th {
+    vertical-align: top;
+}
+
+.table td {
+    font-size: 80%;
+}

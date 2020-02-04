@@ -1,0 +1,16 @@
+.list-group-item svg {
+    display: none;
+}
+
+.list-group-item.active {
+    background-color: #066895;
+    border-color: #066895;
+}
+
+.list-group-item.active svg {
+    display: block;
+}
+
+.button-spacer {
+    height: 21px;
+}

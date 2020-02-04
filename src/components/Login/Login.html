@@ -1,0 +1,28 @@
+<div class="text-center">
+    <PageLoader class="outside" v-show="loader"></PageLoader>
+    <Animated enter="zoomIn" leave="zoomOut" duration="500">
+      <form v-if="init_load" class="form-signin">
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input type="email" v-model="email"class="form-control" placeholder="Email address">
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" v-model="password" class="form-control" placeholder="Password">
+          <div class="checkbox mb-3">
+              <label>
+                  <b-form-checkbox
+                    id="checkbox-1"
+                    name="checkbox-1"
+                    value="accepted"
+                    unchecked-value="not_accepted"
+                  >
+                    Remember Me
+                  </b-form-checkbox>
+              </label>
+          </div>
+          <button class="btn btn-info btn-block" type="button" v-on:click="loginPost">Sign in</button>
+          <div class="mt-2 login-links">
+              <router-link to="/register" class="ml-3">Register</router-link>
+              <router-link to="/forgot-password" class="ml-3">Forgot Password?</router-link>
+          </div>
+      </form>
+    </Animated>
+</div>

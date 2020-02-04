@@ -1,0 +1,7 @@
+.table td {
+    vertical-align: middle !important;
+}
+
+.table tr td:first-child {
+    width: 72px;
+}

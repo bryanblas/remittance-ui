@@ -1,0 +1,12 @@
+.error {
+    color: #f79483;
+    font-size: 75%;
+    margin-top: 8px;
+    display: block;
+}
+
+.formError input,
+.formError select,
+.formError .custom-file {
+    border-color: #f79483 !important;
+}

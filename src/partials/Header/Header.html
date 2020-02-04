@@ -1,0 +1,29 @@
+<div>
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar bg-white shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <router-link to="/" class="navbar-brand">
+                <img src="@/assets/logo.png" alt="" width="180">
+            </router-link>
+            <nav class="my-2 ml-3 main-menu">
+                <router-link v-verified to="/deposits" class="p-2">Deposits</router-link>
+                <router-link v-verified to="/withdrawals" class="p-2">Withdrawals</router-link>
+                <router-link to="/kyc" class="p-2">KYC</router-link>
+            </nav>
+            <div class="col-md-3 text-right">
+                <b-dropdown class="mr-2" variant="outline-secondary">
+                    <template slot="button-content"><div class="profile rounded-circle"></div></template>
+                    <b-dropdown-text class="header-profile pt-2 pb-2">
+                        <i class="header-profile-image mb-3"></i>
+                        <p>{{info.first_name}} {{info.last_name}}</p>
+                        <small>{{ info.email }}</small>
+                    </b-dropdown-text>
+                    <b-dropdown-divider></b-dropdown-divider>
+                    <b-dropdown-item-button class="text-center" v-on:click="onLogout()">Sign out</b-dropdown-item-button>
+                </b-dropdown>
+            </div>
+        </div>
+      </nav>
+    </header>
+</div>

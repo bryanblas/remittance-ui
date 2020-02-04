@@ -1,0 +1,133 @@
+html,
+body {
+  height: 100%;
+}
+
+html, * {
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 300;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #f9f9fc;
+}
+
+.login-base {
+  margin-top: 150px;
+}
+
+.shadow-sm {
+  box-shadow: 0 .125rem .25rem 0 rgba(82, 63, 105, 0.05) !important;
+
+}
+
+label {
+  margin-bottom: .25rem;
+}
+
+.alert-secondary {
+  color: #75757c;
+  background-color: #f9f9fc;
+  border-color: #f7f7fb;
+  font-size: 13px;
+}
+
+.alert-icon {
+    display: flex;
+    align-items: center;
+    padding: 0 1.25rem 0 0;
+    font-size: 50px;
+}
+
+.form-control {
+  font-size: 14px;
+}
+
+#app {
+  width: 100%;
+  margin: 0;
+}
+
+.modal-backdrop {
+  opacity: 0.3;
+}
+
+.modal-content {
+  border: none;
+  border-radius: 0;
+}
+
+.modal-body {
+  font-size: 14px;
+}
+
+.modal-header,
+.modal-footer {
+  border-radius: 0;
+  padding: 0.8rem;
+}
+
+.card {
+  border: none;
+  box-shadow: 0px 0px 13px 0px rgba(82, 63, 105, 0.05);
+}
+.card .card-header {
+  padding: 1rem;
+  background-color: #FFF;
+  border-color: #ebedf2;
+}
+
+.card .card-body {
+  font-size: 14px;
+}
+
+.card .card-footer {
+  padding: 1rem;
+  background-color: #FFF;
+  border-color: #ebedf2;
+}
+
+.table {
+  font-size: 12px;
+  border-top: none;
+  border-color: #f0f3ff;
+}
+
+.table th {
+  border-bottom-width: 1px!important;
+  border-color: #f0f3ff !important;
+  font-weight: bold;
+}
+
+.table th,
+.table td {
+  padding: 0.8rem 0.5rem;
+  border-top: none;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #f0f3ff;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.icon-link {
+  font-size: 18px;
+}
+
+.login-links > a {
+  color: #999;
+  font-size: 12px;
+}
+
+.login-links > a:hover {
+  color: #CCC;
+  text-decoration: none;
+}
